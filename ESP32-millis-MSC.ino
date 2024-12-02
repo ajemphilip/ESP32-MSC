@@ -1,14 +1,14 @@
-int motor1Pin1 = 27; 
+int motor1Pin1 = 27;
 int motor1Pin2 = 26;
-int motor2Pin1 = 33; 
+int motor2Pin1 = 33;
 int motor2Pin2 = 25;
-int motor3Pin1 = 2; 
+int motor3Pin1 = 2;
 int motor3Pin2 = 0;
-int motor4Pin1 = 22; 
+int motor4Pin1 = 22;
 int motor4Pin2 = 23;
-int motor5Pin1 = 19; 
+int motor5Pin1 = 19;
 int motor5Pin2 = 13;
-int motor6Pin1 = 14; 
+int motor6Pin1 = 14;
 int motor6Pin2 = 21;
 
 //first motor controller board
@@ -83,7 +83,7 @@ void setup() {
   pinMode(motor4Pin1, OUTPUT);
   pinMode(motor4Pin2, OUTPUT);
 
-   //Motor pin 5
+  //Motor pin 5
   pinMode(motor5Pin1, OUTPUT);
   pinMode(motor5Pin2, OUTPUT);
 
@@ -109,41 +109,37 @@ void loop() {
 
   //control motor1 button click
   //if motor is not moving activate the button
-  if(motor1Active == false) {
-  button1State = digitalRead(buttonPin1);
+  if (motor1Active == false) {
+    button1State = digitalRead(buttonPin1);
   }
   //else disable the button - block clicking possibility
-  else button1State = 2;
+  else
+    button1State = 2;
 
   //control motor2 button click - same as above
-  if(motor2Active == false) {
-  button2State = digitalRead(buttonPin2);
-  }
-  else button2State = 2;
+  if (motor2Active == false) {
+    button2State = digitalRead(buttonPin2);
+  } else button2State = 2;
 
   //control motor3 button click - same as above
-  if(motor3Active == false) {
-  button3State = digitalRead(buttonPin3);
-  }
-  else button3State = 2;
+  if (motor3Active == false) {
+    button3State = digitalRead(buttonPin3);
+  } else button3State = 2;
 
   //control motor4 button click - same as above
-  if(motor4Active == false) {
-  button4State = digitalRead(buttonPin4);
-  }
-  else button4State = 2;
+  if (motor4Active == false) {
+    button4State = digitalRead(buttonPin4);
+  } else button4State = 2;
 
-   //control motor5 button click - same as above
-  if(motor5Active == false) {
-  button5State = digitalRead(buttonPin5);
-  }
-  else button5State = 2;
+  //control motor5 button click - same as above
+  if (motor5Active == false) {
+    button5State = digitalRead(buttonPin5);
+  } else button5State = 2;
 
- //control motor6 button click - same as above
-  if(motor6Active == false) {
-  button6State = digitalRead(buttonPin6);
-  }
-  else button6State = 2;
+  //control motor6 button click - same as above
+  if (motor6Active == false) {
+    button6State = digitalRead(buttonPin6);
+  } else button6State = 2;
 
   //NOTE
   //I tried 2 different methods of millis in the first if statement and in the 3rd if statement
@@ -151,159 +147,145 @@ void loop() {
   //the third millis takes the variable from setup and count time based on the millis in the motor's if statement block
 
   //motor 1 controller code
-    // if button is pressed or motor1 is moving one or the other direction
-    if(button1State == 0 || motor1Active == true) {
+  // if button is pressed or motor1 is moving one or the other direction
+  if (button1State == 0 || motor1Active == true) {
     // set the motor to be active (if the button is pressed the motor variable unblocks the if statement to run in the loop)
     motor1Active = true;
     //check if the time difference is lesser then 3000ms - 3 seconds || check if the motor should move up or down
-    if(currentTime - startTime1 <= 3000 && motor1UpState == true) {
-    digitalWrite(motor1Pin1, HIGH);
-    digitalWrite(motor1Pin2, LOW);
+    if (currentTime - startTime1 <= 3000 && motor1UpState == true) {
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW);
     }
     //check if the time difference is lesser then 3000ms - 3 seconds || check if the motor should move up or down
-    else if(currentTime - startTime1 <= 3000 && motor1UpState == false) {
-    digitalWrite(motor1Pin1, LOW);
-    digitalWrite(motor1Pin2, HIGH);
+    else if (currentTime - startTime1 <= 3000 && motor1UpState == false) {
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
     }
     //switch motor movement off - reset the time variale and post motor variable to false to enable button click again
     else {
-    digitalWrite(motor1Pin1, LOW);
-    digitalWrite(motor1Pin2, LOW);
-    //set start time as current
-    startTime1 = currentTime;
-    if(motor1UpState == 0) {
-    motor1UpState = 1;
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      //set start time as current
+      startTime1 = currentTime;
+      if (motor1UpState == 0) {
+        motor1UpState = 1;
+      } else motor1UpState = 0;
+      motor1Active = false;
     }
-    else motor1UpState = 0;
-    motor1Active = false;
-      }
-    }
+  }
 
-    //motor 2 controller code - same as above
-    if(button2State == 0 || motor2Active == true) {
+  //motor 2 controller code - same as above
+  if (button2State == 0 || motor2Active == true) {
     motor2Active = true;
     // elapsedTimeMotor2 = millis();
-    if(currentTime - startTime2 <= 3000 && motor2UpState == true) {
-    digitalWrite(motor2Pin1, HIGH);
-    digitalWrite(motor2Pin2, LOW);
+    if (currentTime - startTime2 <= 3000 && motor2UpState == true) {
+      digitalWrite(motor2Pin1, HIGH);
+      digitalWrite(motor2Pin2, LOW);
+    } else if (currentTime - startTime2 <= 3000 && motor2UpState == false) {
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+    } else {
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+      //set start time as current
+      startTime2 = currentTime;
+      if (motor2UpState == 0) {
+        motor2UpState = 1;
+      } else motor2UpState = 0;
+      motor2Active = false;
     }
-    else if(currentTime - startTime2 <= 3000 && motor2UpState == false) {
-    digitalWrite(motor2Pin1, LOW);
-    digitalWrite(motor2Pin2, HIGH);
-    }
-    else {
-    digitalWrite(motor2Pin1, LOW);
-    digitalWrite(motor2Pin2, LOW);
-    //set start time as current
-    startTime2 = currentTime;
-    if(motor2UpState == 0) {
-    motor2UpState = 1;
-    }
-    else motor2UpState = 0;
-    motor2Active = false;
-      }
-    }
+  }
 
-    //motor 3 controller code - other method of millis
-     // if button is pressed or motor1 is moving one or the other direction
-    if(button3State == 0 || motor3Active == true) {
+  //motor 3 controller code - other method of millis
+  // if button is pressed or motor1 is moving one or the other direction
+  if (button3State == 0 || motor3Active == true) {
     // set the motor to be active (if the button is pressed the motor variable unblocks the if statement to run in the loop)
     motor3Active = true;
     // get time in the local code block
     elapsedTimeMotor3 = millis();
     //check if the time difference is lesser then 3000ms - 3 seconds || check if the motor should move up or down
-    if(elapsedTimeMotor3 - startTime <= 3000 && motor3UpState == true) {
-    digitalWrite(motor3Pin1, LOW);
-    digitalWrite(motor3Pin2, HIGH);
+    if (elapsedTimeMotor3 - startTime <= 3000 && motor3UpState == true) {
+      digitalWrite(motor3Pin1, LOW);
+      digitalWrite(motor3Pin2, HIGH);
     }
     //check if the time difference is lesser then 3000ms - 3 seconds || check if the motor should move up or down
-    else if(elapsedTimeMotor3 - startTime <= 3000 && motor3UpState == false) {
-    digitalWrite(motor3Pin1, HIGH);
-    digitalWrite(motor3Pin2, LOW);
+    else if (elapsedTimeMotor3 - startTime <= 3000 && motor3UpState == false) {
+      digitalWrite(motor3Pin1, HIGH);
+      digitalWrite(motor3Pin2, LOW);
     }
     //switch motor movement off - reset the time variale and post motor variable to false to enable button click again
     else {
-    digitalWrite(motor3Pin1, LOW);
-    digitalWrite(motor3Pin2, LOW);
-    // set start time as code block time
-    startTime = elapsedTimeMotor3;
-    if(motor3UpState == 0) {
-    motor3UpState = 1;
-    }
-    else motor3UpState = 0;
-    motor3Active = false;
-      }
-    }
-
-    //motor 4 controller code - same as above
-    if(button4State == 0 || motor4Active == true) {
-    motor4Active = true;
-    elapsedTimeMotor4 = millis();
-    if(elapsedTimeMotor4 - startTime <= 3000 && motor4UpState == true) {
-    digitalWrite(motor4Pin1, HIGH);
-    digitalWrite(motor4Pin2, LOW);
-    }
-    else if(elapsedTimeMotor4 - startTime <= 3000 && motor4UpState == false) {
-    digitalWrite(motor4Pin1, LOW);
-    digitalWrite(motor4Pin2, HIGH);
-    }
-    else {
-    digitalWrite(motor4Pin1, LOW);
-    digitalWrite(motor4Pin2, LOW);
-    startTime = elapsedTimeMotor4;
-    if(motor4UpState == 0) {
-    motor4UpState = 1;
-    }
-    else motor4UpState = 0;
-    motor4Active = false;
-      }
-    }
-
-    //motor 5 controller code - same as above
-    if(button5State == 0 || motor5Active == true) {
-    motor5Active = true;
-    elapsedTimeMotor5 = millis();
-    if(elapsedTimeMotor5 - startTime <= 3000 && motor5UpState == true) {
-    digitalWrite(motor5Pin1, HIGH);
-    digitalWrite(motor5Pin2, LOW);
-    }
-    else if(elapsedTimeMotor5 - startTime <= 3000 && motor5UpState == false) {
-    digitalWrite(motor5Pin1, LOW);
-    digitalWrite(motor5Pin2, HIGH);
-    }
-    else {
-    digitalWrite(motor5Pin1, LOW);
-    digitalWrite(motor5Pin2, LOW);
-    startTime = elapsedTimeMotor5;
-    if(motor5UpState == 0) {
-    motor5UpState = 1;
-    }
-    else motor5UpState = 0;
-    motor5Active = false;
-      }
-    }
-
-    //motor 6 controller code - same as above
-    if(button6State == 0 || motor6Active == true) {
-    motor6Active = true;
-    elapsedTimeMotor6 = millis();
-    if(elapsedTimeMotor6 - startTime <= 3000 && motor6UpState == true) {
-    digitalWrite(motor6Pin1, HIGH);
-    digitalWrite(motor6Pin2, LOW);
-    }
-    else if(elapsedTimeMotor6 - startTime <= 3000 && motor6UpState == false) {
-    digitalWrite(motor6Pin1, LOW);
-    digitalWrite(motor6Pin2, HIGH);
-    }
-    else {
-    digitalWrite(motor6Pin1, LOW);
-    digitalWrite(motor6Pin2, LOW);
-    startTime = elapsedTimeMotor6;
-    if(motor6UpState == 0) {
-    motor6UpState = 1;
-    }
-    else motor6UpState = 0;
-    motor6Active = false;
-      }
+      digitalWrite(motor3Pin1, LOW);
+      digitalWrite(motor3Pin2, LOW);
+      // set start time as code block time
+      startTime = elapsedTimeMotor3;
+      if (motor3UpState == 0) {
+        motor3UpState = 1;
+      } else motor3UpState = 0;
+      motor3Active = false;
     }
   }
+
+  //motor 4 controller code - same as above
+  if (button4State == 0 || motor4Active == true) {
+    motor4Active = true;
+    elapsedTimeMotor4 = millis();
+    if (elapsedTimeMotor4 - startTime <= 3000 && motor4UpState == true) {
+      digitalWrite(motor4Pin1, HIGH);
+      digitalWrite(motor4Pin2, LOW);
+    } else if (elapsedTimeMotor4 - startTime <= 3000 && motor4UpState == false) {
+      digitalWrite(motor4Pin1, LOW);
+      digitalWrite(motor4Pin2, HIGH);
+    } else {
+      digitalWrite(motor4Pin1, LOW);
+      digitalWrite(motor4Pin2, LOW);
+      startTime = elapsedTimeMotor4;
+      if (motor4UpState == 0) {
+        motor4UpState = 1;
+      } else motor4UpState = 0;
+      motor4Active = false;
+    }
+  }
+
+  //motor 5 controller code - same as above
+  if (button5State == 0 || motor5Active == true) {
+    motor5Active = true;
+    elapsedTimeMotor5 = millis();
+    if (elapsedTimeMotor5 - startTime <= 3000 && motor5UpState == true) {
+      digitalWrite(motor5Pin1, HIGH);
+      digitalWrite(motor5Pin2, LOW);
+    } else if (elapsedTimeMotor5 - startTime <= 3000 && motor5UpState == false) {
+      digitalWrite(motor5Pin1, LOW);
+      digitalWrite(motor5Pin2, HIGH);
+    } else {
+      digitalWrite(motor5Pin1, LOW);
+      digitalWrite(motor5Pin2, LOW);
+      startTime = elapsedTimeMotor5;
+      if (motor5UpState == 0) {
+        motor5UpState = 1;
+      } else motor5UpState = 0;
+      motor5Active = false;
+    }
+  }
+
+  //motor 6 controller code - same as above
+  if (button6State == 0 || motor6Active == true) {
+    motor6Active = true;
+    elapsedTimeMotor6 = millis();
+    if (elapsedTimeMotor6 - startTime <= 3000 && motor6UpState == true) {
+      digitalWrite(motor6Pin1, HIGH);
+      digitalWrite(motor6Pin2, LOW);
+    } else if (elapsedTimeMotor6 - startTime <= 3000 && motor6UpState == false) {
+      digitalWrite(motor6Pin1, LOW);
+      digitalWrite(motor6Pin2, HIGH);
+    } else {
+      digitalWrite(motor6Pin1, LOW);
+      digitalWrite(motor6Pin2, LOW);
+      startTime = elapsedTimeMotor6;
+      if (motor6UpState == 0) {
+        motor6UpState = 1;
+      } else motor6UpState = 0;
+      motor6Active = false;
+    }
+  }
+}
